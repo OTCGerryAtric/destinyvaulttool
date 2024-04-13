@@ -46,16 +46,6 @@ def get_membership_info(headers):
     else:
         return None, None
 
-def get_character_ids(membership_type, membership_id, headers):
-    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/?components=200"
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        character_ids = list(data['Response']['characters']['data'].keys())
-        return character_ids
-    else:
-        return []
-
 def get_inventory(membership_type, membership_id, headers):
     url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/?components=102"
     response = requests.get(url, headers=headers)
