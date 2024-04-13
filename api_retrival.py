@@ -37,7 +37,8 @@ def get_membership_info(headers):
         data = response.json()
         membership_type = data['Response']['destinyMemberships'][0]['membershipType']
         membership_id = data['Response']['destinyMemberships'][0]['membershipId']
-        return membership_type, membership_id
+        unique_name = data['Response']['destinyMemberships'][0]['displayName']
+        return membership_type, membership_id, unique_name
     else:
         return None, None
 
