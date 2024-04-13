@@ -13,16 +13,9 @@ API_KEY = 'a287ebb36bcb4f6db80c8b7e2afa12df'  # Replace with your actual Bungie 
 def generate_auth_url():
     return f"{AUTH_URL}?client_id={CLIENT_ID}&response_type=code&redirect_uri={REDIRECT_URI}"
 
-auth_url = generate_auth_url()
-
-# Custom HTML to open the link in the same tab
-html_code = f'''
-<a href="{auth_url}" target="_self">Authenticate here</a>
-'''
-
 if st.button('Login with Bungie.net'):
-    components.html(html_code, height=300)
-
+    auth_url = generate_auth_url()
+    st.markdown(f"[Authenticate here]({auth_url})")
 
 # def exchange_code_for_token(code):
 #     data = {
