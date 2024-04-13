@@ -74,10 +74,11 @@ if st.button("Get Token"):
         headers = {'Authorization': f'Bearer {access_token}', 'X-API-Key': API_KEY}
 
         # Fetch membership info
-        membership_type, membership_id = get_membership_info(headers)
-        if membership_type and membership_id:
+        membership_type, membership_id, unique_name = get_membership_info(headers)
+        if membership_type and membership_id and unique_name:
             st.write("Membership Type:", membership_type)
             st.write("Membership ID:", membership_id)
+            st.write("Display Name:", unique_name)
 
             # Fetch character IDs
             character_ids = get_character_ids(membership_type, membership_id, headers)
