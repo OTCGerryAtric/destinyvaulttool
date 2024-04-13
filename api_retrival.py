@@ -17,77 +17,77 @@ if st.button('Login with Bungie.net'):
     auth_url = generate_auth_url()
     st.markdown(f"[Authenticate here]({auth_url})")
 
-def exchange_code_for_token(code):
-    data = {
-        'grant_type': 'authorization_code',
-        'client_id': CLIENT_ID,
-        'code': code,
-        'redirect_uri': REDIRECT_URI
-    }
-    response = requests.post(TOKEN_URL, data=data)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return response.text
-
-def get_membership_info(headers):
-    url = "https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/"
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        membership_type = data['Response']['destinyMemberships'][0]['membershipType']
-        membership_id = data['Response']['destinyMemberships'][0]['membershipId']
-        return membership_type, membership_id
-    else:
-        return None, None
-
-def get_character_ids(membership_type, membership_id, headers):
-    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/?components=200"
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        character_ids = list(data['Response']['characters']['data'].keys())
-        return character_ids
-    else:
-        return []
-
-def get_inventory(membership_type, membership_id, character_id, headers):
-    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/Character/{character_id}/?components=205"
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        items = data['Response']['equipment']['data']['items']
-        return items
-    else:
-        return []
-
-code = st.text_input("Enter the code from URL here:")
-if st.button("Get Token"):
-    token_response = exchange_code_for_token(code)
-    if isinstance(token_response, dict) and 'access_token' in token_response:
-        access_token = token_response['access_token']
-        st.success("Token successfully obtained!")
-        st.write("Access Token:", access_token)
-
-        # Setup headers
-        headers = {'Authorization': f'Bearer {access_token}', 'X-API-Key': API_KEY}
-
-        # Fetch membership info
-        membership_type, membership_id = get_membership_info(headers)
-        if membership_type and membership_id:
-            st.write("Membership Type:", membership_type)
-            st.write("Membership ID:", membership_id)
-
-            # Fetch character IDs
-            character_ids = get_character_ids(membership_type, membership_id, headers)
-            st.write("Character IDs:", character_ids)
-
-            # Fetch and display inventory for each character
-            for character_id in character_ids:
-                inventory = get_inventory(membership_type, membership_id, character_id, headers)
-                st.write(f"Inventory for Character {character_id}:", inventory)
-        else:
-            st.error("Failed to retrieve membership information.")
-    else:
-        st.error("Failed to get token.")
-        st.write(token_response)  # Display the error message or response text
+# def exchange_code_for_token(code):
+#     data = {
+#         'grant_type': 'authorization_code',
+#         'client_id': CLIENT_ID,
+#         'code': code,
+#         'redirect_uri': REDIRECT_URI
+#     }
+#     response = requests.post(TOKEN_URL, data=data)
+#     if response.status_code == 200:
+#         return response.json()
+#     else:
+#         return response.text
+#
+# def get_membership_info(headers):
+#     url = "https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/"
+#     response = requests.get(url, headers=headers)
+#     if response.status_code == 200:
+#         data = response.json()
+#         membership_type = data['Response']['destinyMemberships'][0]['membershipType']
+#         membership_id = data['Response']['destinyMemberships'][0]['membershipId']
+#         return membership_type, membership_id
+#     else:
+#         return None, None
+#
+# def get_character_ids(membership_type, membership_id, headers):
+#     url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/?components=200"
+#     response = requests.get(url, headers=headers)
+#     if response.status_code == 200:
+#         data = response.json()
+#         character_ids = list(data['Response']['characters']['data'].keys())
+#         return character_ids
+#     else:
+#         return []
+#
+# def get_inventory(membership_type, membership_id, character_id, headers):
+#     url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/Character/{character_id}/?components=205"
+#     response = requests.get(url, headers=headers)
+#     if response.status_code == 200:
+#         data = response.json()
+#         items = data['Response']['equipment']['data']['items']
+#         return items
+#     else:
+#         return []
+#
+# code = st.text_input("Enter the code from URL here:")
+# if st.button("Get Token"):
+#     token_response = exchange_code_for_token(code)
+#     if isinstance(token_response, dict) and 'access_token' in token_response:
+#         access_token = token_response['access_token']
+#         st.success("Token successfully obtained!")
+#         st.write("Access Token:", access_token)
+#
+#         # Setup headers
+#         headers = {'Authorization': f'Bearer {access_token}', 'X-API-Key': API_KEY}
+#
+#         # Fetch membership info
+#         membership_type, membership_id = get_membership_info(headers)
+#         if membership_type and membership_id:
+#             st.write("Membership Type:", membership_type)
+#             st.write("Membership ID:", membership_id)
+#
+#             # Fetch character IDs
+#             character_ids = get_character_ids(membership_type, membership_id, headers)
+#             st.write("Character IDs:", character_ids)
+#
+#             # Fetch and display inventory for each character
+#             for character_id in character_ids:
+#                 inventory = get_inventory(membership_type, membership_id, character_id, headers)
+#                 st.write(f"Inventory for Character {character_id}:", inventory)
+#         else:
+#             st.error("Failed to retrieve membership information.")
+#     else:
+#         st.error("Failed to get token.")
+#         st.write(token_response)  # Display the error message or response text
