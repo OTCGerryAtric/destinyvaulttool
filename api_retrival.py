@@ -17,3 +17,19 @@ def generate_auth_url():
 st.title('Destiny Vault Tool')
 if st.button('Login with Bungie.net'):
     st.write('Please authenticate:', generate_auth_url())
+
+def exchange_code_for_token(code):
+    data = {
+        'grant_type': 'authorization_code',
+        'client_id': CLIENT_ID,
+        'code': code,
+        'redirect_uri': REDIRECT_URI
+    }
+    response = requests.post(TOKEN_URL, data=data)
+    return response.json()
+
+code = st.text_input("Enter the code from URL here:")
+if st.button("Get Token"):
+    token_response = exchange_code_for_token(code)
+    st.text("Access Token:")
+    st.write(token_response.get('access_token'))
