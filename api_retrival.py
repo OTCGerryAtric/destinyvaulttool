@@ -82,7 +82,7 @@ if st.button("Get Token"):
             st.write("Membership Type:", membership_type)
             st.write("Membership ID:", membership_id)
             inventory = get_inventory(membership_type, membership_id, headers)
-            st.write(f"Inventory for Character:", inventory)
+            st.write(inventory)
 
             # # Fetch character IDs
             # character_ids = get_character_ids(membership_type, membership_id, headers)
