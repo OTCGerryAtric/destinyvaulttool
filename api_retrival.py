@@ -86,7 +86,7 @@ if st.button("Get Token"):
             # Fetch and display inventory for each character
             for character_id in character_ids:
                 inventory = get_inventory(membership_type, membership_id, headers)
-                # st.write(f"Inventory for Character {character_id}:", inventory)
+                st.write(f"Inventory for Character:", inventory)
         else:
             st.error("Failed to retrieve membership information.")
     else:
