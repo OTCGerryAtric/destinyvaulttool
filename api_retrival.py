@@ -1,6 +1,5 @@
 import requests
 import streamlit as st
-import streamlit.components.v1 as components
 
 # Constants for Bungie's OAuth
 REDIRECT_URI = 'https://destinyvaulttool.streamlit.app'  # Update with your actual redirect URI
@@ -53,7 +52,7 @@ def get_character_ids(membership_type, membership_id, headers):
         return []
 
 def get_inventory(membership_type, membership_id, character_id, headers):
-    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/Character/{character_id}/?components=205"
+    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/Character/{character_id}/?components=201"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
