@@ -21,7 +21,7 @@ html_code = f'''
 '''
 
 if st.button('Login with Bungie.net'):
-    components.html(html_code, height=30)
+    components.html(html_code, height=300)
 
 
 # def exchange_code_for_token(code):
