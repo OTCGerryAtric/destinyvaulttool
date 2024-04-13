@@ -52,11 +52,11 @@ def get_character_ids(membership_type, membership_id, headers):
         return []
 
 def get_inventory(membership_type, membership_id, character_id, headers):
-    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/Character/{character_id}/?components=201"
+    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/?components=102"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        items = data['Response']['equipment']['data']['items']
+        items = data['Response']['profileInventory']['data']['items']
         return items
     else:
         return []
