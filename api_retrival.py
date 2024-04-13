@@ -35,9 +35,9 @@ def get_membership_info(headers):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
+        unique_name = data['Response']['destinyMemberships'][0]['displayName']
         membership_type = data['Response']['destinyMemberships'][0]['membershipType']
         membership_id = data['Response']['destinyMemberships'][0]['membershipId']
-        unique_name = data['Response']['destinyMemberships'][0]['displayName']
         return membership_type, membership_id, unique_name
     else:
         return None, None
@@ -76,9 +76,9 @@ if st.button("Get Token"):
         # Fetch membership info
         membership_type, membership_id, unique_name = get_membership_info(headers)
         if membership_type and membership_id and unique_name:
+            st.write("Display Name:", unique_name)
             st.write("Membership Type:", membership_type)
             st.write("Membership ID:", membership_id)
-            st.write("Display Name:", unique_name)
 
             # Fetch character IDs
             character_ids = get_character_ids(membership_type, membership_id, headers)
