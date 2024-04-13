@@ -3,10 +3,10 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 # Constants for Bungie's OAuth
-CLIENT_ID = '46615'  # Update with your actual client ID
 REDIRECT_URI = 'https://destinyvaulttool.streamlit.app'  # Update with your actual redirect URI
 AUTH_URL = 'https://www.bungie.net/en/OAuth/Authorize'
 TOKEN_URL = 'https://www.bungie.net/platform/app/oauth/token/'
+CLIENT_ID = '46615'  # Update with your actual client ID
 API_KEY = 'a287ebb36bcb4f6db80c8b7e2afa12df'  # Replace with your actual Bungie API key
 
 # Generate the authorization URL
