@@ -1,6 +1,10 @@
 import requests
 import streamlit as st
 import pandas as pd
+import os
+
+save_directory = r'C:\Users\gerry\downloads'
+os.chdir(save_directory)
 
 # Constants for Bungie's OAuth
 REDIRECT_URI = 'https://destinyvaulttool.streamlit.app'  # Update with your actual redirect URI
@@ -87,15 +91,16 @@ if st.button("Get Token"):
             st.write("Display Name:", unique_name)
             st.write("Membership Type:", membership_type)
             st.write("Membership ID:", membership_id)
+            inventory = get_inventory(membership_type, membership_id, headers)
+            st.write(f"Inventory for Character:", inventory)
 
-            # Fetch character IDs
-            character_ids = get_character_ids(membership_type, membership_id, headers)
-            st.write("Character IDs:", character_ids)
-
-            # Fetch and display inventory for each character
-            for character_id in character_ids:
-                inventory = get_inventory(membership_type, membership_id, headers)
-                st.write(f"Inventory for Character:", inventory)
+            # # Fetch character IDs
+            # character_ids = get_character_ids(membership_type, membership_id, headers)
+            # st.write("Character IDs:", character_ids)
+            #
+            # # Fetch and display inventory for each character
+            # for character_id in character_ids:
+            #
         else:
             st.error("Failed to retrieve membership information.")
     else:
