@@ -3,8 +3,8 @@ import streamlit as st
 import pandas as pd
 import os
 
-save_directory = r'C:\Users\gerry\downloads'
-os.chdir(save_directory)
+# save_directory = r'C:\Users\gerry\downloads'
+# os.chdir(save_directory)
 
 # Constants for Bungie's OAuth
 REDIRECT_URI = 'https://destinyvaulttool.streamlit.app'  # Update with your actual redirect URI
