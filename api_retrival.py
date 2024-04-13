@@ -9,7 +9,7 @@ CLIENT_ID = '46615'  # Update with your actual client ID
 REDIRECT_URI = 'https://destinyvaulttool.streamlit.app/callback'  # Update with your actual redirect URI
 AUTH_URL = 'https://www.bungie.net/en/OAuth/Authorize'
 TOKEN_URL = 'https://www.bungie.net/platform/app/oauth/token/'
-API_KEY = 'YOUR_BUNGIE_API_KEY'  # Replace with your actual Bungie API key
+API_KEY = 'a287ebb36bcb4f6db80c8b7e2afa12df'  # Replace with your actual Bungie API key
 
 # Generate the authorization URL
 def generate_auth_url():
