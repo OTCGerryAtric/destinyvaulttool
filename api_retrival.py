@@ -65,9 +65,9 @@ def get_inventory(membership_type, membership_id, headers):
             }
             for item in items
         ]
-        return filtered_items
+        return pd.DataFrame(filtered_items)
     else:
-        return []  # Return an empty list if the API call was unsuccessful
+        return pd.DataFrame()  # Return an empty DataFrame if the API call was unsuccessful
 
 code = st.text_input("Enter the code from URL here:")
 if st.button("Get Token"):
