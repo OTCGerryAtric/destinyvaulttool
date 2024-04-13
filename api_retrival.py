@@ -1,5 +1,6 @@
 import requests
 import streamlit as st
+import pandas as pd
 
 # Constants for Bungie's OAuth
 REDIRECT_URI = 'https://destinyvaulttool.streamlit.app'  # Update with your actual redirect URI
