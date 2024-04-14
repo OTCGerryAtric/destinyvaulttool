@@ -17,7 +17,7 @@ def generate_auth_url():
 
 if st.button('Login with Bungie.net'):
     auth_url = generate_auth_url()
-    # st.markdown(f"[Authenticate here]({auth_url})")
+    st.markdown(f"[Authenticate here]({auth_url})")
 
 def exchange_code_for_token(code):
     data = {
