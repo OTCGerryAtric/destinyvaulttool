@@ -4,9 +4,9 @@ import pandas as pd
 import streamlit.components.v1 as components
 
 # Constants for Bungie's Links and Redirect
-REDIRECT_URI = 'https://destinyvaulttool.streamlit.app'  # Update with your actual redirect URI
 AUTH_URL = 'https://www.bungie.net/en/OAuth/Authorize'
 TOKEN_URL = 'https://www.bungie.net/platform/app/oauth/token/'
+REDIRECT_URI = 'https://destinyvaulttool.streamlit.app'
 
 # List Client ID and API Key
 CLIENT_ID = '46615'
