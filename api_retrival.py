@@ -1,7 +1,6 @@
 import requests
 import streamlit as st
 import pandas as pd
-import streamlit.components.v1 as components
 
 # Set Page Config
 st.set_page_config(page_title="Destiny 2 Vault Tool", page_icon=None, layout="wide", initial_sidebar_state="expanded", menu_items=None)
@@ -46,7 +45,7 @@ def get_membership_info(headers):
         membership_id = data['Response']['destinyMemberships'][0]['membershipId']
         return membership_type, membership_id, unique_name
     else:
-        return None, None
+        return None, None, None
 
 def get_inventory(membership_type, membership_id, headers):
     component = '102'  # Change to '201' for detailed character inventories, if needed
@@ -67,17 +66,26 @@ if st.button("Get Token"):
         st.success("Token successfully obtained!")
 
         # Setup headers
-        headers = {'Authorization': f'Bearer {access_token}', 'X-API-Key': API_KEY}
+        headers = {
+            'Authorization': f'Bearer {access_token}',
+            'X-API-Key': API_KEY
+        }
 
         # Fetch membership info
         membership_type, membership_id, unique_name = get_membership_info(headers)
-        if membership_type and membership_id and unique_name:
-            st.write("Display Name:", unique_name)
-            st.write("Membership Type:", membership_type)
-            st.write("Membership ID:", membership_id)
+        if membership_type and membership_id:
+            st.write(f"Display Name: {unique_name}")
+            st.write(f"Membership Type: {membership_type}")
+            st.write(f"Membership ID: {membership_id}")
 
+            # Fetch inventory
+            inventory_df = get_inventory(membership_type, membership_id, headers)
+            if not inventory_df.empty:
+                st.dataframe(inventory_df)
+            else:
+                st.error("Failed to retrieve inventory.")
         else:
             st.error("Failed to retrieve membership information.")
     else:
-        st.error("Failed to get token.")
-        st.write(token_response)
+        st.error("Failed to get token. Please check the code and try again.")
+        st.write(token_response)  # To display more detailed error info
