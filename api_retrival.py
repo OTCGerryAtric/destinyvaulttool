@@ -1,6 +1,7 @@
 import requests
 import streamlit as st
 import pandas as pd
+import streamlit.components.v1 as components
 
 # Constants for Bungie's Links and Redirect
 REDIRECT_URI = 'https://destinyvaulttool.streamlit.app'  # Update with your actual redirect URI
@@ -17,7 +18,9 @@ def generate_auth_url():
 
 if st.button('Login with Bungie.net'):
     auth_url = generate_auth_url()
-    st.markdown(f"[Authenticate here]({auth_url})")
+    # Using HTML directly to ensure behavior
+    link_html = f'<a href="{auth_url}" target="_self">Authenticate here</a>'
+    components.html(link_html, height=30)
 
 def exchange_code_for_token(code):
     data = {
