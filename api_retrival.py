@@ -20,7 +20,7 @@ if st.button('Login with Bungie.net'):
     auth_url = generate_auth_url()
     # Redirect in the same window
     js_redirect = f"window.location.href = '{auth_url}';"
-    st.components.v1.html(f"<script>{js_redirect}</script>", height=0)
+    st.components.v1.html(f"<script>{js_redirect}</script>", height=100)
 
 def exchange_code_for_token(code):
     data = {
