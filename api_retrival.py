@@ -48,15 +48,26 @@ def get_membership_info(headers):
         return None, None, None
 
 def get_inventory(membership_type, membership_id, headers):
-    component = '102'  # Change to '201' for detailed character inventories, if needed
+    component = '201'  # Using CharacterInventories for detailed inventory per character
     inventory_url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/?components={component}"
     response = requests.get(inventory_url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        items = data['Response']['profileInventory']['data']['items']  # Update path according to the chosen component
-        return pd.DataFrame(items)
+        all_items = []
+        # Iterate through each character's inventory
+        for character_id, inventory in data['Response']['characterInventories']['data'].items():
+            for item in inventory['items']:
+                if item['itemHash'] == 2119346509:  # Filtering for Ammit AR2
+                    item_details = {
+                        'character_id': character_id,
+                        'item_instance_id': item.get('itemInstanceId', 'N/A'),
+                        'item_hash': item['itemHash'],
+                        'quantity': item.get('quantity', 1)  # Default to 1 if not specified
+                    }
+                    all_items.append(item_details)
+        return pd.DataFrame(all_items)
     else:
-        return pd.DataFrame()  # Return an empty DataFrame if the API call was unsuccessful
+        return pd.DataFrame()  # Return an empty DataFrame if unsuccessful
 
 code = st.text_input("Enter the code from URL here:")
 if st.button("Get Token"):
