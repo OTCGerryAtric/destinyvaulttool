@@ -47,7 +47,7 @@ def get_membership_info(headers):
         return None, None
 
 def get_inventory(membership_type, membership_id, headers):
-    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/?components=102"
+    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/?components=201"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
