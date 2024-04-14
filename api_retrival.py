@@ -61,8 +61,6 @@ if st.button("Get Token"):
             st.write("Display Name:", unique_name)
             st.write("Membership Type:", membership_type)
             st.write("Membership ID:", membership_id)
-            inventory = get_inventory(membership_type, membership_id, headers)
-            st.write(inventory)
 
         else:
             st.error("Failed to retrieve membership information.")
