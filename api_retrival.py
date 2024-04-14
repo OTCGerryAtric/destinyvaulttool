@@ -47,7 +47,6 @@ def get_membership_info(headers):
     else:
         return None, None, None
 
-
 def get_all_inventories(membership_type, membership_id, character_ids, headers):
     component = '201'  # CharacterInventories component
     all_items = []
