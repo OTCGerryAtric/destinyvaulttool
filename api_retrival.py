@@ -61,7 +61,6 @@ if st.button("Get Token"):
     if isinstance(token_response, dict) and 'access_token' in token_response:
         access_token = token_response['access_token']
         st.success("Token successfully obtained!")
-        st.write("Access Token:", access_token)
 
         # Setup headers
         headers = {'Authorization': f'Bearer {access_token}', 'X-API-Key': API_KEY}
