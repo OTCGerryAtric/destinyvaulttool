@@ -45,16 +45,6 @@ def get_membership_info(headers):
     else:
         return None, None
 
-def get_inventory(membership_type, membership_id, headers):
-    url = f"https://www.bungie.net/Platform/Destiny2/{membership_type}/Profile/{membership_id}/?components=201"
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        items = data['Response']
-        return pd.DataFrame(items)
-    else:
-        return pd.DataFrame()  # Return an empty DataFrame if the API call was unsuccessful
-
 code = st.text_input("Enter the code from URL here:")
 if st.button("Get Token"):
     token_response = exchange_code_for_token(code)
