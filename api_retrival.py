@@ -1,17 +1,15 @@
 import requests
 import streamlit as st
 import pandas as pd
-import os
 
-# save_directory = r'C:\Users\gerry\downloads'
-# os.chdir(save_directory)
-
-# Constants for Bungie's OAuth
+# Constants for Bungie's Links and Redirect
 REDIRECT_URI = 'https://destinyvaulttool.streamlit.app'  # Update with your actual redirect URI
 AUTH_URL = 'https://www.bungie.net/en/OAuth/Authorize'
 TOKEN_URL = 'https://www.bungie.net/platform/app/oauth/token/'
-CLIENT_ID = '46615'  # Update with your actual client ID
-API_KEY = 'a287ebb36bcb4f6db80c8b7e2afa12df'  # Replace with your actual Bungie API key
+
+# List Client ID and API Key
+CLIENT_ID = '46615'
+API_KEY = 'a287ebb36bcb4f6db80c8b7e2afa12df'
 
 # Generate the authorization URL
 def generate_auth_url():
@@ -19,7 +17,7 @@ def generate_auth_url():
 
 if st.button('Login with Bungie.net'):
     auth_url = generate_auth_url()
-    st.markdown(f"[Authenticate here]({auth_url})")
+    # st.markdown(f"[Authenticate here]({auth_url})")
 
 def exchange_code_for_token(code):
     data = {
@@ -84,13 +82,6 @@ if st.button("Get Token"):
             inventory = get_inventory(membership_type, membership_id, headers)
             st.write(inventory)
 
-            # # Fetch character IDs
-            # character_ids = get_character_ids(membership_type, membership_id, headers)
-            # st.write("Character IDs:", character_ids)
-            #
-            # # Fetch and display inventory for each character
-            # for character_id in character_ids:
-            #
         else:
             st.error("Failed to retrieve membership information.")
     else:
