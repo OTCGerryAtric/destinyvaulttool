@@ -79,4 +79,4 @@ if st.button("Get Token"):
             st.error("Failed to retrieve membership information.")
     else:
         st.error("Failed to get token.")
-        st.write(token_response)  # Display the error message or response text
+        st.write(token_response)
