@@ -3,6 +3,9 @@ import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
 
+# Set Page Config
+st.set_page_config(page_title="Destiny 2 Vault Tool", page_icon=None, layout="wide", initial_sidebar_state="expanded", menu_items=None)
+
 # Constants for Bungie's Links and Redirect
 AUTH_URL = 'https://www.bungie.net/en/OAuth/Authorize'
 TOKEN_URL = 'https://www.bungie.net/platform/app/oauth/token/'
