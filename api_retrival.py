@@ -51,15 +51,7 @@ def get_inventory(membership_type, membership_id, headers):
     if response.status_code == 200:
         data = response.json()
         items = data['Response']
-        filtered_items = [
-            {
-                'itemHash': item.get('itemHash'),
-                'itemInstanceId': item.get('itemInstanceId', None),  # Some items might not have an instance ID
-                'quantity': item.get('quantity', 1)  # Default quantity to 1 if not provided
-            }
-            for item in items
-        ]
-        return pd.DataFrame(filtered_items)
+        return pd.DataFrame(items)
     else:
         return pd.DataFrame()  # Return an empty DataFrame if the API call was unsuccessful
 
