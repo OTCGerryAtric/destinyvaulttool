@@ -51,7 +51,7 @@ def get_inventory(membership_type, membership_id, headers):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        items = data['Response']['profileInventory']['data']['items']
+        items = data['Response']
         filtered_items = [
             {
                 'itemHash': item.get('itemHash'),
